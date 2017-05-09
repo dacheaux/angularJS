@@ -14,5 +14,5 @@ ol li p {
 }
 
 div.error {
-	display: inline-block;
+	font-weight: bold;
 }
