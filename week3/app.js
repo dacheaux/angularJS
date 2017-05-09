@@ -35,14 +35,15 @@ function NarrowItDownController(MenuSearchService) {
     menu.loading = false;
 
     menu.getSearchedItems = function() {
-      menu.error = false;
       menu.found = [];
       menu.loading = true;
+      menu.error = false;
       if (menu.searchTerm.length > 0) {
         MenuSearchService.getMatchedMenuItems(menu.searchTerm)
             .then(function(response) {
                 menu.found = response;
                 menu.loading = false;
+                if (menu.found.length == 0) menu.error = true;
             })
             .catch(function(error) {
                 console.log("Oh noes, something's wrong.");
