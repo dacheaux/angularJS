@@ -31,10 +31,8 @@ function NarrowItDownController(MenuSearchService) {
         MenuSearchService.getMatchedMenuItems(menu.searchTerm)
             .then(function(response) {
                 menu.found = response;
-                console.log(menu.found);
                 if (menu.found == null || menu.found.length == 0) {
                     menu.error = true;
-                    console.log(menu.error, 'true');
                 } else {
                     menu.error = false;
                 }

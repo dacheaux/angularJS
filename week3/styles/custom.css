@@ -1,0 +1,14 @@
+li button {
+	position: absolute;
+	right: 1em;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+ol li {
+}
+
+ol li p {
+	width: 80%;
+	margin: .5em;
+}
