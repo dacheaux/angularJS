@@ -17,6 +17,7 @@
     <div class="form-group narrow-button">
       <button class="btn btn-primary" ng-click="menu.getSearchedItems()">Narrow It Down For Me!</button>
     </div>
+    <loader ng-if="(menu.found.length == 0) && menu.loading && !menu.error"></loader>
     <span class="clearfix"></span>
     <!-- found-items should be implemented as a component -->
     <list-found-items ng-if="(menu.found.length != 0) && !menu.error" found-items="menu.found" on-remove="menu.removeItem(index)" title="Possible Menu Items"></list-found-items>

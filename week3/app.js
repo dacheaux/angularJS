@@ -4,18 +4,25 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('listFoundItems', ListFoundItems);
+.directive('listFoundItems', ListFoundItems)
+.directive('loader', Loader);
 
 function ListFoundItems() {
   var ddo = {
-    templateUrl: 'loader/itemsloaderindicator.template.html',
+    templateUrl: 'list.html',
     scope: {
       title: "@title",
       items: '=foundItems',
       remove: '&onRemove'
     }
   };
+  return ddo;
+}
 
+function Loader() {
+  var ddo = {
+    templateUrl: 'loader/itemsloaderindicator.template.html',
+  };
   return ddo;
 }
 
@@ -25,17 +32,16 @@ function NarrowItDownController(MenuSearchService) {
     menu.found = [];
     menu.searchTerm = "";
     menu.error = false;
+    menu.loading = false;
 
     menu.getSearchedItems = function() {
+      menu.found = [];
+      menu.loading = true;
       if (menu.searchTerm.length > 0) {
         MenuSearchService.getMatchedMenuItems(menu.searchTerm)
             .then(function(response) {
                 menu.found = response;
-                if (menu.found == null || menu.found.length == 0) {
-                    menu.error = true;
-                } else {
-                    menu.error = false;
-                }
+                menu.loading = false;
             })
             .catch(function(error) {
                 console.log("Oh noes, something's wrong.");
@@ -45,11 +51,10 @@ function NarrowItDownController(MenuSearchService) {
 
     menu.removeItem = function(itemIndex) {
         menu.found.splice(itemIndex, 1);
-        console.log('Removed');
+        console.log('removed');
     };
 
 }
-
 
 MenuSearchService.$inject = ['$http'];
 function MenuSearchService($http) {
@@ -62,18 +67,11 @@ function MenuSearchService($http) {
     }).then(function (result) {
     	var foundItems = [];
     	searchTerm = searchTerm.toLowerCase().trim();
-    	/*for (var item in result.data.menu_items){
-         if (result.data.menu_items[item].description.includes(searchTerm)){
-           foundItems.push(result.data.menu_items[item])
-           console.log(result.data.menu_items[item]);
+    	for (let item of result.data.menu_items){
+         if (item.description.includes(searchTerm)){
+           foundItems.push(item);
          }
-      }*/
-      for (var i = 0, len = result.data.menu_items.length; i < len; i++) {
-            var found = result.data.menu_items[i].description.toLowerCase().indexOf(searchTerm);
-            if (found != -1) {
-              foundItems.push(result.data.menu_items[i]);
-            }
-          }
+      }
     	return foundItems;
     });
   };
