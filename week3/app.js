@@ -35,6 +35,7 @@ function NarrowItDownController(MenuSearchService) {
     menu.loading = false;
 
     menu.getSearchedItems = function() {
+      menu.error = false;
       menu.found = [];
       menu.loading = true;
       if (menu.searchTerm.length > 0) {

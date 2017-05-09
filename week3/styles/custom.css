@@ -12,3 +12,7 @@ ol li p {
 	width: 80%;
 	margin: .5em;
 }
+
+div.error {
+	display: inline-block;
+}
