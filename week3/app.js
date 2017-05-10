@@ -4,15 +4,15 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('listFoundItems', ListFoundItems)
+.directive('foundItems', foundItems)
 .directive('loader', Loader);
 
-function ListFoundItems() {
+function foundItems() {
   var ddo = {
     templateUrl: 'list.html',
     scope: {
-      title: "@title",
-      items: '=foundItems',
+      title: "@titled",
+      items: '<found',
       remove: '&onRemove'
     }
   };
@@ -55,6 +55,13 @@ function NarrowItDownController(MenuSearchService) {
         menu.found.splice(itemIndex, 1);
         console.log('removed');
     };
+
+    menu.onEnter = function(keyEvent) {
+      if (keyEvent.which === 13) {
+          menu.getSearchedItems();
+      }
+    };
+
 
 }
 
