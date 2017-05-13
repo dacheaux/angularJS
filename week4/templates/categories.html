@@ -1,0 +1,7 @@
+<h3>All Categories</h3>
+<a ui-sref="home">Home</a> &lt; <span>Categories</span>
+<ul>
+	<li ng-repeat="item in catsCtrl.categories" ui-sref="items({category: '{{item.short_name}}'})">
+		<p>({{ item.short_name }}) <a href="#"><b>{{ item.name }}</a></p>
+	</li>
+</ul>

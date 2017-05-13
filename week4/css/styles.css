@@ -1,0 +1,9 @@
+body {
+  font-size: 1.1em;
+}
+
+.loading-icon {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+}
