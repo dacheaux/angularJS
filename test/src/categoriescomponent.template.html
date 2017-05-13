@@ -1,0 +1,5 @@
+<ul>
+	<li ng-repeat="item in $ctrl.items">
+    	<a ui-sref="items({category: item.short_name})" class="ng-binding" href="#/items/L">{{item.name}}</a>
+  	</li>
+</ul>
