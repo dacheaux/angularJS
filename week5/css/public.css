@@ -183,3 +183,23 @@ h3.menu-item-title {
     width: 100%;
   }
 }
+
+fieldset {
+  width: 50%;
+}
+
+legend {
+  color: white;
+}
+
+.signup {
+  text-align: center;
+}
+
+.signup hr {
+  width: 50%;
+}
+
+.dish {
+  margin: 0 25%;
+}
